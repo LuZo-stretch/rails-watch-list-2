@@ -1,0 +1,12 @@
+.submit {
+  color: white;
+  background-color: #55c2da;
+  border: none;
+  border-radius: 5px;
+  transition: bacground-color 0.3s ease;
+  padding: 10px 20px;
+
+  &:hover {
+    background-color: #85cbdb;
+  }
+}

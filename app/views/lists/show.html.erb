@@ -1,0 +1,49 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= @list.image %>)">
+  <div class="banner-content">
+    <%= @list.name %>
+  </div>
+  <div class="movies-counter">
+    <p><%= @movies_count %> movies</p>
+    </div>
+</div>
+<div class="container my-3">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end">
+      <%= link_to 'Add a movie', new_list_bookmark_path(@list), class: 'custom-button' %>
+    </div>
+  </div>
+</div>
+
+<div class="container my-3">
+  <div class="row">
+    <% @bookmarks.each do |bookmark| %>
+      <div class="col-4">
+        <div class="card small-card">
+          <img class="card-img-top" src="<%= bookmark.movie.poster_url %>" alt="Movie Poster Image">
+          <div class="card-body">
+            <div class="d-flex align-items-baseline justify-content-between">
+              <h4 class="card-title"><%= bookmark.movie.title %></h4>
+              <h6>⭐ <%= bookmark.movie.rating %></h6>
+            </div>
+            <p class="card-text"><%= bookmark.movie.overview %></p>
+          </div>
+            <footer class="blockquote-footer m-3"><%= bookmark.comment %></footer>
+            <%= link_to "Delete", list_bookmark_path(@list, bookmark), data: { turbo_method: :delete }, class: "delete" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+      <div class="container my-3">
+        <div class="row">
+          <div class="col-6 border my-3 py-3 px-5">
+            <h1>Add a movie: </h1>
+              <%= simple_form_for([@list, @bookmark]) do |f| %>
+                <%= f.association :movie %>
+                <%= f.input :comment %>
+                <%= f.submit "Add movie", class: 'custom-button' %>
+              <% end %>
+          </div>
+        </div>
+      </div>
+</div>
